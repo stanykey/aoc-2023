@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: pretty-format-json
+        args:
+          - --no-sort-keys
+          - --autofix
+          - --indent=4
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: detect-private-key
+      - id: check-json
+      - id: check-ast
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: debug-statements
+
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+      - id: cmake-format
+      - id: cmake-lint
+
+  - repo: https://github.com/pocc/pre-commit-hooks
+    rev: v1.3.5
+    hooks:
+      - id: clang-format
+      - id: clang-tidy
+        args: [-p=./cmake-build-debug/compile_commands.json --extra-arg=--std=c++20]
