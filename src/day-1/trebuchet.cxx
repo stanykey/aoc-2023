@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cctype>
 #include <cstdint>
 #include <format>
 #include <fstream>
@@ -6,8 +7,8 @@
 #include <iterator>
 #include <numeric>
 #include <optional>
-#include <regex>
 #include <string>
+#include <string_view>
 #include <tuple>
 #include <vector>
 
@@ -21,23 +22,51 @@ namespace {
         return data;
     }
 
-    auto get_calibration_digits(const std::string& str) -> std::optional<std::tuple<std::int32_t, std::int32_t>> {
-        const auto pattern = std::regex{R"(\d)"};
 
-        auto matches = std::vector<std::string>{};
-        auto begin   = std::sregex_iterator{str.cbegin(), str.cend(), pattern};
-        for (const auto end = std::sregex_iterator{}; begin != end; ++begin) {
-            matches.emplace_back(begin->str());
+    auto extract_digits(const std::string& str) -> std::vector<std::int32_t> {
+        // Ordered list of spelled-out digits, longest words first to handle overlaps
+        const std::vector<std::tuple<std::string_view, int>> digit_words = {
+            {"eight", 8}, {"seven", 7}, {"three", 3}, {"nine", 9}, {"four", 4},
+            {"five", 5},  {"six", 6},   {"two", 2},   {"one", 1},
+        };
+
+        std::vector<std::int32_t> digits;
+        for (auto i = 0ul; i < str.size();) {
+            // If no word matched, check for single numeric characters
+            if (std::isdigit(str[i]) != 0) {
+                digits.push_back(str[i] - '0');  // Convert char to int
+                i++;
+                continue;
+            }
+
+            // Check for spelled-out digits first
+            bool found = false;
+            for (const auto& [word, value] : digit_words) {
+                if (str.substr(i, word.size()) == word) {
+                    digits.push_back(value);
+                    i += word.size() - 1;  // Move past the matched word, but without one letter due to potential overlaps
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                i++;
+            }
         }
 
+        return digits;
+    }
+
+
+    auto get_calibration_digits(const std::string& str) -> std::optional<std::tuple<std::int32_t, std::int32_t>> {
+        auto matches = extract_digits(str);
         if (matches.empty()) {
             // No digits found
             return std::nullopt;
         }
 
-        const auto first_digit = matches.front()[0] - '0';
-        const auto last_digit  = matches.back()[0] - '0';
-        return std::make_tuple(first_digit, last_digit);
+        return std::make_tuple(matches.front(), matches.back());
     }
 
 
