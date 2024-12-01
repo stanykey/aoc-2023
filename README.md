@@ -5,7 +5,7 @@ Language of choice: `C++ 20`
 ---
 ## Puzzles
 
-- [ ] Day 1
+- [x] Day 1: Trebuchet?!
 - [ ] Day 2
 - [ ] Day 3
 - [ ] Day 4
