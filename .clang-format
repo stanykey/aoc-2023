@@ -1,0 +1,103 @@
+Language: Cpp
+Standard: c++20
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 125
+
+IndentWidth: 4
+IndentRequiresClause: true
+IndentCaseBlocks: false
+IndentCaseLabels: true
+IndentWrappedFunctionNames: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+AccessModifierOffset: -4
+
+BinPackArguments: true
+BinPackParameters: true
+AlignAfterOpenBracket: BlockIndent
+
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+AlignEscapedNewlines: Left
+AlignOperands: AlignAfterOperator
+AlignTrailingComments: true
+
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: Yes
+ReflowComments: true
+
+BreakBeforeConceptDeclarations: true
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeComma
+BreakStringLiterals: true
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterNamespace: false
+  AfterClass: false
+  AfterStruct: false
+  AfterEnum: false
+  AfterUnion: false
+  AfterExternBlock: false
+  AfterFunction: false
+  AfterCaseLabel: false
+  AfterControlStatement: Never
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyNamespace: false
+  SplitEmptyRecord: false
+
+NamespaceIndentation: All
+CompactNamespaces: false
+FixNamespaceComments: true
+Cpp11BracedListStyle: true
+PointerAlignment: Left
+DerivePointerAlignment: false
+DisableFormat: false
+
+SortUsingDeclarations: true
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  # built-in
+  - Regex: '<([A-Za-z0-9\Q/-_\E])+>'
+    Priority: 1
+
+  # third-party
+  - Regex: '<.+\..+>'
+    Priority: 2
+
+CommentPragmas: '^ IWYU pragma:'
+IncludeIsMainRegex: (Test)?$
+MacroBlockBegin: ''
+MacroBlockEnd: ''
+
+KeepEmptyLinesAtTheStartOfBlocks: false
+EmptyLineBeforeAccessModifier: Always
+MaxEmptyLinesToKeep: 2
+
+SpaceAfterCStyleCast: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: Never
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+PenaltyBreakBeforeFirstCallParameter: 19937
+PenaltyReturnTypeOnItsOwnLine: 19937

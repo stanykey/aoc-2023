@@ -1,0 +1,35 @@
+---
+Checks: >
+  -*,
+  bugpron-*,
+    -bugprone-easily-swappable-parameters,
+    -bugprone-exception-escape,
+  clang-analyzer-*,
+  readability-*,
+    -readability-named-parameter,
+    -readability-uppercase-literal-suffix,
+    -readability-identifier-length,
+    -readability-redundant-access-specifiers,
+    -readability-convert-member-functions-to-static,
+  performance-*,
+  cppcoreguidelines-*,
+    -cppcoreguidelines-pro-bounds-constant-array-index,
+    -cppcoreguidelines-avoid-magic-numbers,
+    -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  modernize-*,
+    -modernize-use-trailing-return-type,
+  misc-*,
+    -misc-non-private-member-variables-in-classes,
+    -misc-definitions-in-headers,
+    -misc-no-recursion,
+    -misc-static-assert,
+    -misc-unused-alias-decls,
+  hicpp-*,
+    -hicpp-signed-bitwise,
+    -hicpp-named-parameter,
+    -hicpp-uppercase-literal-suffix
+
+
+WarningsAsErrors: '*'
+
+FormatStyle: file
