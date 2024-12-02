@@ -36,3 +36,5 @@ and `58` (middle right). Every other number is adjacent to a symbol and so **is*
 
 Of course, the actual engine schematic is much larger.
 **What is the sum of all of the part numbers in the engine schematic?**
+
+Your puzzle answer was `533784`.
