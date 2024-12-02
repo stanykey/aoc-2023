@@ -75,3 +75,7 @@ so its gear ratio is `16345`. The second gear is in the lower right; its gear ra
 Adding up all of the gear ratios produces `467835`.
 
 **What is the sum of all of the gear ratios in your engine schematic?**
+
+Your puzzle answer was `78826761`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*

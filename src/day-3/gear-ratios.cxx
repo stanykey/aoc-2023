@@ -5,6 +5,7 @@
 #include <format>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <numeric>
 #include <set>
 #include <stdexcept>
@@ -16,7 +17,10 @@
 
 
 namespace {
-    using Schema = std::vector<std::string>;
+    using Schema      = std::vector<std::string>;
+    using Coordinate  = std::tuple<std::size_t, std::size_t>;
+    using PartNumbers = std::vector<std::uint32_t>;
+    using Parts       = std::map<Coordinate, PartNumbers>;
 
 
     constexpr auto DIGITS      = std::string_view{"0123456789"};
@@ -53,7 +57,8 @@ namespace {
         return {str.substr(start, end - start), start};
     }
 
-    auto is_part_number(const Schema& schema, std::string_view number, std::size_t row, std::size_t col) -> bool {
+    auto is_part_number(const Schema& schema, std::string_view number, std::size_t row, std::size_t col)
+        -> std::tuple<bool, std::size_t, std::size_t> {
         const auto rows          = schema.size();
         const auto number_length = number.size();
 
@@ -67,31 +72,52 @@ namespace {
                 }
 
                 if ((x < line.size()) && !NON_SYMBOLS.contains(line[x])) {
-                    return true;  // Found a symbol
+                    return {true, y, x};  // Found a symbol
                 }
             }
         }
 
-        return false;
+        return {false, std::string_view::npos, std::string_view::npos};
     }
 
-    auto get_part_numbers(const Schema& schema) -> std::vector<std::uint32_t> {
-        auto part_numbers = std::vector<std::uint32_t>{};
+    auto get_parts(const Schema& schema) -> Parts {
+        auto parts = Parts{};
 
         for (auto i = 0u; i != schema.size(); i++) {
             const auto line = std::string_view{schema[i]};
 
             auto [number, pos] = find_next_number(line, 0);
             while (!number.empty()) {
-                if (is_part_number(schema, number, i, pos)) {
-                    part_numbers.emplace_back(to_number(number));
+                const auto [ok, row, col] = is_part_number(schema, number, i, pos);
+                if (ok) {
+                    parts[{row, col}].emplace_back(to_number(number));
                 }
 
                 std::tie(number, pos) = find_next_number(line, pos + number.size() + 1);
             }
         }
 
+        return parts;
+    }
+
+    auto get_part_numbers(const Parts& parts) -> PartNumbers {
+        auto part_numbers = PartNumbers{};
+        for (const auto& [symbol, numbers] : parts) {
+            part_numbers.insert(part_numbers.end(), numbers.cbegin(), numbers.cend());
+        }
         return part_numbers;
+    }
+
+    auto get_gear_ratios(const Schema& schema, const Parts& parts) -> std::vector<std::uint32_t> {
+        auto ratios = std::vector<std::uint32_t>{};
+        for (const auto& [coordinate, numbers] : parts) {
+            const auto [row, col] = coordinate;
+            if ((schema[row][col] == '*') && (numbers.size() == 2)) {
+                ratios.emplace_back(numbers.front() * numbers.back());
+            }
+        }
+
+        return ratios;
     }
 }  // namespace
 
@@ -100,9 +126,14 @@ auto main() -> int {
     try {
         const auto schema = load_engine_schematic("input.data");
 
-        const auto part_numbers     = get_part_numbers(schema);
+        const auto parts            = get_parts(schema);
+        const auto part_numbers     = get_part_numbers(parts);
         const auto part_numbers_sum = std::reduce(part_numbers.cbegin(), part_numbers.cend());
         std::cout << std::format("The sum of part numbers in the engine schematic is {}\n", part_numbers_sum);
+
+        const auto gear_ratios     = get_gear_ratios(schema, parts);
+        const auto gear_ratios_sum = std::reduce(gear_ratios.cbegin(), gear_ratios.cend());
+        std::cout << std::format("The sum of gear ratios in the engine schematic is {}\n", gear_ratios_sum);
     } catch (const std::exception& ex) {  // NOLINT: std::exception if fine here
         std::cerr << std::format("Critical error: {}\n", ex.what());
         return 1;
