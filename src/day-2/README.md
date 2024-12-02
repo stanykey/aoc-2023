@@ -70,3 +70,7 @@ Adding up these five powers produces the sum `2286`.
 
 For each game, find the minimum set of cubes that must have been present.
 **What is the sum of the power of these sets?**
+
+Your puzzle answer was `69929`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*

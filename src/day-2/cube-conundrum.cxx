@@ -120,6 +120,22 @@ namespace {
         });
     }
 
+    auto get_game_power_score(const Game& game) -> std::size_t {
+        Set power_set;
+        for (const auto set : game.sets) {
+            power_set.red   = std::max(power_set.red, set.red);
+            power_set.green = std::max(power_set.green, set.green);
+            power_set.blue  = std::max(power_set.blue, set.blue);
+        }
+        return power_set.red * power_set.green * power_set.blue;
+    }
+
+    auto get_total_power_score(const std::vector<Game>& games) -> std::size_t {
+        return std::reduce(games.cbegin(), games.cend(), std::size_t{0}, [](std::size_t prefix, const Game& game) {
+            return prefix + get_game_power_score(game);
+        });
+    }
+
 }  // namespace
 
 
@@ -132,8 +148,11 @@ auto main() -> int {
             .green = 13,
             .blue  = 14,
         };
-        const auto score = get_total_score(games, session_set);
-        std::cout << std::format("The total score is {}\n", score);
+        const auto total_score = get_total_score(games, session_set);
+        std::cout << std::format("The total score is {}\n", total_score);
+
+        const auto power_score = get_total_power_score(games);
+        std::cout << std::format("The total power score is {}\n", power_score);
     } catch (const std::exception& ex) {  // NOLINT: std::exception if fine here
         std::cerr << std::format("Critical error: {}\n", ex.what());
         return 1;
