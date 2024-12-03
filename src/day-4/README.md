@@ -91,3 +91,7 @@ scratchcards!
 
 Process all of the original and copied scratchcards until no more scratchcards are won. Including the original set of
 scratchcards, **how many total scratchcards do you end up with?**
+
+Your puzzle answer was `5921508`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*

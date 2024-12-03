@@ -1,17 +1,18 @@
 #include <algorithm>
 #include <charconv>
+#include <cstddef>
 #include <cstdint>
 #include <format>
 #include <fstream>
 #include <iostream>
 #include <iterator>
 #include <numeric>
-#include <optional>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
 #include <system_error>
+#include <unordered_map>
 #include <vector>
 
 
@@ -81,25 +82,29 @@ namespace {
             return card;
         }
 
+        auto id() const -> std::uint32_t {
+            return id_;
+        }
+
         auto get_points() const -> std::uint32_t {
-            if (points_) {
-                return points_.value();
+            return (1 << (get_matches().size() - 1));
+        }
+
+        auto get_matches() const -> const std::vector<std::uint32_t>& {
+            if (matches_.empty()) {
+                std::set_intersection(
+                    winning_numbers_.cbegin(), winning_numbers_.cend(), draft_numbers_.cbegin(), draft_numbers_.cend(),
+                    std::back_inserter(matches_)
+                );
             }
-
-            auto matches = std::vector<std::uint32_t>{};
-            std::set_intersection(
-                winning_numbers_.cbegin(), winning_numbers_.cend(), draft_numbers_.cbegin(), draft_numbers_.cend(),
-                std::back_inserter(matches)
-            );
-
-            return points_.emplace(1 << (matches.size() - 1));
+            return matches_;
         }
 
     private:
-        std::uint32_t                        id_{0};
-        std::vector<std::uint32_t>           winning_numbers_;
-        std::vector<std::uint32_t>           draft_numbers_;
-        mutable std::optional<std::uint32_t> points_;
+        std::uint32_t                      id_{0};
+        std::vector<std::uint32_t>         winning_numbers_;
+        std::vector<std::uint32_t>         draft_numbers_;
+        mutable std::vector<std::uint32_t> matches_;
     };
 
 
@@ -125,6 +130,29 @@ namespace {
         return scores;
     }
 
+    auto calculate_game_result(const std::vector<Card>& cards) -> std::uint32_t {
+        auto counter = std::unordered_map<std::uint32_t, std::uint32_t>{};
+
+        const auto copy_cards = [&](std::size_t id, std::size_t count, std::size_t multiplier) {
+            const auto max_id = cards.size() + 1;
+            while (id != max_id && count != 0) {
+                counter[id] += multiplier;
+                id++;
+                count--;
+            }
+        };
+
+        for (const auto& card : cards) {
+            const auto& matches = card.get_matches();
+            counter[card.id()]++;
+            copy_cards(card.id() + 1, matches.size(), counter[card.id()]);
+        }
+
+        return std::reduce(counter.cbegin(), counter.cend(), std::uint32_t{0}, [&](std::uint32_t stored, const auto& entry) {
+            const auto [id, count] = entry;
+            return stored + count;
+        });
+    }
 }  // namespace
 
 
@@ -135,6 +163,9 @@ auto main() -> int {
         const auto cards_points = get_cards_points(cards);
         const auto total_points = std::reduce(cards_points.cbegin(), cards_points.cend());
         std::cout << std::format("The total points worth is {}\n", total_points);
+
+        const auto scratchcards = calculate_game_result(cards);
+        std::cout << std::format("The total amount of scratchcards is {}\n", scratchcards);
     } catch (const std::exception& ex) {  // NOLINT: std::exception if fine here
         std::cerr << std::format("Critical error: {}\n", ex.what());
         return 1;

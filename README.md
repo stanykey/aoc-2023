@@ -8,7 +8,7 @@ Language of choice: `C++ 20`
 - [x] Day 1: Trebuchet?!
 - [x] Day 2: Cube Conundrum
 - [x] Day 3: Gear Ratios
-- [ ] Day 4: Scratchcards
+- [x] Day 4: Scratchcards
 - [ ] Day 5
 - [ ] Day 6
 - [ ] Day 7
