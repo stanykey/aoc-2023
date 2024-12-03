@@ -120,3 +120,7 @@ To do this, you'll need to convert each seed number through other categories unt
 So, the lowest location number in this example is **35**.
 
 **What is the lowest location number that corresponds to any of the initial seed numbers?**
+
+Your puzzle answer was `340994526`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
