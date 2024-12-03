@@ -1,8 +1,11 @@
 #ifndef CORE_IO_HXX
 #define CORE_IO_HXX
 
+#include <algorithm>
 #include <cstddef>
 #include <istream>
+#include <ranges>
+#include <string>
 #include <vector>
 
 
@@ -26,6 +29,15 @@ namespace core::io {
 
         return result;
     }
+
+    template<typename T>
+    auto read_sequence(std::istream& input) -> std::vector<T> {
+        auto sequence = std::vector<T>{};
+        std::ranges::copy(std::views::istream<T>(input), std::back_inserter(sequence));
+        return sequence;
+    }
+
+    auto read_line(std::istream& input) -> std::string;
 }  // namespace core::io
 
 #endif  // CORE_IO_HXX

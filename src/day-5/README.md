@@ -146,3 +146,7 @@ number is **46**.
 
 Consider all of the initial seed numbers listed in the ranges on the first line of the almanac.
 **What is the lowest location number that corresponds to any of the initial seed numbers?**
+
+Your puzzle answer was `52210644`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*

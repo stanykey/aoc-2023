@@ -5,6 +5,7 @@
 
 #include <charconv>
 #include <format>
+#include <istream>
 #include <iterator>
 #include <sstream>
 #include <stdexcept>
@@ -27,13 +28,16 @@ namespace core::numbers {
     }
 
     template<typename Number>
-    auto parse_numbers(std::string_view record) -> std::vector<Number> {
+    auto parse_numbers(std::istream& stream) -> std::vector<Number> {
         auto numbers = std::vector<Number>{};
-        auto stream  = std::istringstream{std::string{record}};
-
         std::copy(std::istream_iterator<Number>{stream}, std::istream_iterator<Number>{}, std::back_inserter(numbers));
-
         return numbers;
+    }
+
+    template<typename Number>
+    auto parse_numbers(std::string_view record) -> std::vector<Number> {
+        auto stream = std::istringstream{std::string{record}};
+        return parse_numbers<Number>(stream);
     }
 
 }  // namespace core::numbers
