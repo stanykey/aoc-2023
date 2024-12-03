@@ -1,5 +1,6 @@
+#include <core/numbers.hxx>
+
 #include <algorithm>
-#include <charconv>
 #include <cstddef>
 #include <cstdint>
 #include <format>
@@ -8,10 +9,8 @@
 #include <map>
 #include <numeric>
 #include <set>
-#include <stdexcept>
 #include <string>
 #include <string_view>
-#include <system_error>
 #include <tuple>
 #include <vector>
 
@@ -26,14 +25,6 @@ namespace {
     constexpr auto DIGITS      = std::string_view{"0123456789"};
     const auto     NON_SYMBOLS = std::set<char>{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'};
 
-
-    auto to_number(std::string_view str) -> std::uint32_t {
-        std::uint32_t number = 0;
-        if (std::from_chars(str.data(), str.data() + str.size(), number).ec != std::errc{}) {
-            throw std::runtime_error(std::format("Failed to parse integer from <{}>", str));
-        }
-        return number;
-    }
 
     auto load_engine_schematic(const std::string& path) -> Schema {
         auto schema = Schema{};
@@ -90,7 +81,7 @@ namespace {
             while (!number.empty()) {
                 const auto [ok, row, col] = is_part_number(schema, number, i, pos);
                 if (ok) {
-                    parts[{row, col}].emplace_back(to_number(number));
+                    parts[{row, col}].emplace_back(core::numbers::parse<std::uint32_t>(number));
                 }
 
                 std::tie(number, pos) = find_next_number(line, pos + number.size() + 1);

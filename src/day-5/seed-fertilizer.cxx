@@ -1,5 +1,6 @@
+#include <core/io.hxx>
+
 #include <algorithm>
-#include <cstddef>
 #include <cstdint>
 #include <format>
 #include <fstream>
@@ -12,28 +13,6 @@
 #include <unordered_map>
 #include <vector>
 
-
-namespace io {
-    template<typename T>
-    auto read(std::istream& input) -> T {
-        T value{};
-        input >> value;
-        return value;
-    }
-
-    template<typename T>
-    auto read(std::istream& input, std::size_t count) -> std::vector<T> {
-        auto result = std::vector<T>{};
-
-        result.reserve(count);
-        while (count--) {
-            auto value = read<T>(input);
-            result.emplace_back(std::move(value));
-        }
-
-        return result;
-    }
-}  // namespace io
 
 namespace {
     struct SeedInfo {
@@ -61,9 +40,9 @@ namespace {
             while (std::getline(in, line) && !line.empty()) {
                 std::istringstream data_line(line);
 
-                auto dest_start = io::read<std::uint64_t>(data_line);
-                auto src_start  = io::read<std::uint64_t>(data_line);
-                auto range_size = io::read<std::uint64_t>(data_line);
+                auto dest_start = core::io::read<std::uint64_t>(data_line);
+                auto src_start  = core::io::read<std::uint64_t>(data_line);
+                auto range_size = core::io::read<std::uint64_t>(data_line);
 
                 table_.emplace_back(std::make_tuple(src_start, src_start + range_size - 1), dest_start);
             }
@@ -99,7 +78,7 @@ namespace {
     auto load_garden_plan(const std::string& data_path) -> std::vector<SeedInfo> {
         auto plan_document = std::ifstream{data_path};
 
-        auto line = io::read<std::string>(plan_document);
+        auto line = core::io::read<std::string>(plan_document);
         if (!line.starts_with("seeds:")) {
             throw std::invalid_argument("invalid input steam");
         }

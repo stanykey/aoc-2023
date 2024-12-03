@@ -1,5 +1,6 @@
+#include <core/numbers.hxx>
+
 #include <algorithm>
-#include <charconv>
 #include <cstddef>
 #include <cstdint>
 #include <format>
@@ -7,52 +8,17 @@
 #include <iostream>
 #include <iterator>
 #include <numeric>
-#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
-#include <system_error>
 #include <unordered_map>
 #include <vector>
 
 
 namespace {
-    auto trim(std::string_view str) -> std::string_view {
-        while (str.starts_with(' ')) {
-            str.remove_prefix(1);
-        }
-
-        while (str.ends_with(' ')) {
-            str.remove_suffix(1);
-        }
-
-        return str;
-    }
-
-    auto to_number(std::string_view str) -> std::uint32_t {
-        str = trim(str);
-
-        std::uint32_t number = 0;
-        if (std::from_chars(str.data(), str.data() + str.size(), number).ec != std::errc{}) {
-            throw std::runtime_error(std::format("Failed to parse integer from <{}>", str));
-        }
-        return number;
-    }
-
     auto make_subview(std::string_view source, char symbol) -> std::string_view {
         const auto symbol_position = source.find(symbol);
         return source.substr(0, symbol_position);
-    }
-
-    auto parse_numbers(std::string_view record) -> std::vector<std::uint32_t> {
-        auto numbers = std::vector<std::uint32_t>{};
-        auto stream  = std::istringstream{std::string{record}};
-
-        std::copy(
-            std::istream_iterator<std::uint32_t>{stream}, std::istream_iterator<std::uint32_t>{}, std::back_inserter(numbers)
-        );
-
-        return numbers;
     }
 
 
@@ -66,17 +32,17 @@ namespace {
 
             // extract id
             const auto id = make_subview(record, ':');
-            card.id_      = to_number(id);
+            card.id_      = core::numbers::parse<std::uint32_t>(id);
             record.remove_prefix(id.size() + 1);
 
             // read winning numbers
             const auto winning_numbers = make_subview(record, '|');
-            card.winning_numbers_      = parse_numbers(winning_numbers);
+            card.winning_numbers_      = core::numbers::parse_numbers<std::uint32_t>(winning_numbers);
             std::ranges::sort(card.winning_numbers_);
             record.remove_prefix(winning_numbers.size() + 1);
 
             // read draft numbers
-            card.draft_numbers_ = parse_numbers(record);
+            card.draft_numbers_ = core::numbers::parse_numbers<std::uint32_t>(record);
             std::ranges::sort(card.draft_numbers_);
 
             return card;

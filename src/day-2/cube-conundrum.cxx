@@ -1,3 +1,6 @@
+#include <core/numbers.hxx>
+#include <core/strings.hxx>
+
 #include <algorithm>
 #include <cstddef>
 #include <format>
@@ -30,33 +33,16 @@ namespace {
         std::vector<Set> sets;
     };
 
-
-    auto split(std::string_view source, std::string_view delimiter) -> std::vector<std::string_view> {
-        std::vector<std::string_view> parts;
-        while (!source.empty()) {
-            const auto position = source.find(delimiter);
-
-            parts.emplace_back(source.substr(0, position));
-
-            source.remove_prefix(parts.back().size());
-            if (!source.empty()) {
-                source.remove_prefix(delimiter.size());
-            }
-        }
-
-        return parts;
-    }
-
     auto extract_game_id(std::string_view str) -> std::size_t {
         std::match_results<std::string_view::const_iterator> match;
         if (std::regex_match(str.cbegin(), str.cend(), match, std::regex{R"(Game (\d+))"})) {
-            return std::stoul(match[1].str());
+            return core::numbers::parse<std::size_t>(match[1].str());
         }
         return 0;
     }
 
     auto parse_set_record(std::string_view record) -> Set {
-        const auto parts   = split(record, ", ");
+        const auto parts   = core::strings::split(record, ", ");
         const auto pattern = std::regex{R"((\d+)\s+(\w+))"};
 
         Set set;
@@ -79,12 +65,12 @@ namespace {
 
     auto parse_sets_record(std::string_view record) -> std::vector<Set> {
         std::vector<Set> sets;
-        std::ranges::transform(split(record, "; "), std::back_inserter(sets), parse_set_record);
+        std::ranges::transform(core::strings::split(record, "; "), std::back_inserter(sets), parse_set_record);
         return sets;
     }
 
     auto parse_game_record(std::string_view record) -> Game {
-        const auto parts = split(record, ": ");
+        const auto parts = core::strings::split(record, ": ");
         return {
             .id   = extract_game_id(parts[0]),
             .sets = parse_sets_record(parts[1]),
