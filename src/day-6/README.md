@@ -96,3 +96,7 @@ milliseconds** and the record distance you need to beat is **940200 millimeters*
 from `14` to `71516` milliseconds and beat the record, a total of **71503** ways!
 
 **How many ways can you beat the record in this one much longer race?**
+
+Your puzzle answer was `45128024`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
