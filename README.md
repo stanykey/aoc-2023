@@ -10,7 +10,7 @@ Language of choice: `C++ 20`
 - [x] Day 3: Gear Ratios
 - [x] Day 4: Scratchcards
 - [x] Day 5: If You Give A Seed A Fertilizer
-- [ ] Day 6
+- [ ] Day 6: Wait For It
 - [ ] Day 7
 - [ ] Day 8
 - [ ] Day 9

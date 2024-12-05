@@ -70,3 +70,5 @@ example, if you multiply these values together, you get **288** (`4 * 8 * 9`).
 
 Determine the number of ways you could beat the record in each race. **What do you get if you multiply these numbers
 together?**
+
+Your puzzle answer was `800280`.
