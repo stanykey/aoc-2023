@@ -94,3 +94,7 @@ So, in this example, you end up entirely on nodes that end in `Z` after **6** st
 
 Simultaneously start on every node that ends with `A`. **How many steps does it take before you're only on nodes that
 end with Z?**
+
+Your puzzle answer was `9177460370549`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
