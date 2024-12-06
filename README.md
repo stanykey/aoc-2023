@@ -13,7 +13,7 @@ Language of choice: `C++ 20`
 - [x] Day 6: Wait For It
 - [x] Day 7: Camel Cards
 - [x] Day 8: Haunted Wasteland
-- [ ] Day 9: Mirage Maintenance
+- [x] Day 9: Mirage Maintenance
 - [ ] Day 10
 - [ ] Day 11
 - [ ] Day 12
