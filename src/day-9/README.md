@@ -106,3 +106,7 @@ If you find the next value for each history in this example and add them togethe
 
 Analyze your OASIS report and extrapolate the next value for each history. **What is the sum of these extrapolated
 values?**
+
+Your puzzle answer was `1934898178`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
