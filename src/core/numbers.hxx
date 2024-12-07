@@ -18,7 +18,7 @@
 namespace core::numbers {
     template<typename Number>
     auto parse(std::string_view str) -> Number {
-        str = strings::trim(str);
+        str = strings::strip(str);
 
         Number number = 0;
         if (std::from_chars(str.data(), str.data() + str.size(), number).ec != std::errc{}) {

@@ -7,7 +7,7 @@
 
 namespace core::strings {
     auto split(std::string_view source, std::string_view delimiter) -> std::vector<std::string_view>;
-    auto trim(std::string_view str) -> std::string_view;
+    auto strip(std::string_view str, std::string_view chars = "\n\r\t ") -> std::string_view;
 }  // namespace core::strings
 
 
