@@ -59,9 +59,10 @@ namespace {
             }
 
             const auto reversed_heads = heads | std::views::reverse;
-            return std::reduce(reversed_heads.begin(), reversed_heads.end(), std::int64_t{0}, [](int acc, int value) {
-                return value - acc;
-            });
+            return std::reduce(
+                reversed_heads.begin(), reversed_heads.end(), std::int64_t{0},
+                [](std::int64_t acc, std::int64_t value) { return value - acc; }
+            );
         };
 
         const auto predictions = histogram | std::views::transform(predict);
