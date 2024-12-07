@@ -14,7 +14,7 @@ Language of choice: `C++ 20`
 - [x] Day 7: Camel Cards
 - [x] Day 8: Haunted Wasteland
 - [x] Day 9: Mirage Maintenance
-- [ ] Day 10
+- [ ] Day 10: Pipe Maze
 - [ ] Day 11
 - [ ] Day 12
 - [ ] Day 13
