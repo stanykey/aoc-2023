@@ -1,6 +1,6 @@
 # [Advent of Code 2023](https://adventofcode.com/2023)
 
-Language of choice: `C++ 20`
+Language of choice: `C++ 20/23`
 
 ---
 ## Puzzles
