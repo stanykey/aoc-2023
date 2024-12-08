@@ -22,7 +22,7 @@ namespace {
         std::int64_t col = 0;
     };
 
-    auto sum_of_distances(const Grid& image) -> std::size_t {
+    auto sum_of_distances(const Grid& image, std::size_t expansion_size) -> std::size_t {
         const auto all_space = [](const auto& range) {
             return std::ranges::all_of(std::get<1>(range), [](char symbol) { return symbol == '.'; });
         };
@@ -63,7 +63,8 @@ namespace {
                 std::ranges::upper_bound(empty_rows, std::min(first.row, second.row)),
                 std::ranges::lower_bound(empty_rows, std::max(first.row, second.row))
             );
-            return std::abs(first.col - second.col) + columns + std::abs(first.row - second.row) + rows;
+            return (std::abs(first.col - second.col) + (expansion_size - 1) * columns)
+                 + (std::abs(first.row - second.row) + (expansion_size - 1) * rows);
         };
 
 
@@ -105,8 +106,13 @@ int main() {
     const auto image_data = core::io::read_file(path, true);
     const auto image      = core::strings::split(core::strings::strip(image_data), "\n");
 
-    const auto distances_sum = sum_of_distances(image);
+    const auto distances_sum = sum_of_distances(image, 2);
     std::cout << std::format("The sum of distances for all galaxies after expansion is {}\n", distances_sum);
+
+    const auto distances_sum_with_old = sum_of_distances(image, 1'000'000);
+    std::cout << std::format(
+        "The sum of distances for all galaxies in an old universe after expansion is {}\n", distances_sum_with_old
+    );
 
     return 0;
 }

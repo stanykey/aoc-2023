@@ -1,4 +1,5 @@
-Cosmic Expansion ---
+# Cosmic Expansion
+
 You continue following signs for "Hot Springs" and eventually come across
 an [observatory](https://en.wikipedia.org/wiki/Observatory). The Elf within turns out to be a researcher studying cosmic
 expansion using the giant telescope here.
@@ -136,3 +137,7 @@ these values.)
 
 Starting with the same initial image, expand the universe according to these new rules, then find the length of the
 shortest path between every pair of galaxies. **What is the sum of these lengths?**
+
+Your puzzle answer was `842645913794`.
+
+*__ Both parts of this puzzle are complete! They provide two gold stars: **__*

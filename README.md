@@ -15,7 +15,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 8: Haunted Wasteland
 - [x] Day 9: Mirage Maintenance
 - [x] Day 10: Pipe Maze
-- [ ] Day 11: Cosmic Expansion
+- [x] Day 11: Cosmic Expansion
 - [ ] Day 12
 - [ ] Day 13
 - [ ] Day 14
