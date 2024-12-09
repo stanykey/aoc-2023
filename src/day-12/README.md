@@ -146,3 +146,7 @@ In the above example, after unfolding, the number of possible arrangements for s
 After unfolding, adding all of the possible arrangement counts together produces **525152**.
 
 Unfold your condition records; **what is the new sum of possible arrangement counts?**
+
+Your puzzle answer was `11461095383315`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
