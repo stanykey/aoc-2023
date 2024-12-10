@@ -17,7 +17,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 10: Pipe Maze
 - [x] Day 11: Cosmic Expansion
 - [x] Day 12: Hot Springs
-- [ ] Day 13
+- [ ] Day 13: Point of Incidence
 - [ ] Day 14
 - [ ] Day 15
 - [ ] Day 16

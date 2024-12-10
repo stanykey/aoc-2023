@@ -13,7 +13,7 @@ direction?
 As you move through the valley of mirrors, you find that several of them have fallen from the large metal frames keeping
 them in place. The mirrors are extremely flat and shiny, and many of the fallen mirrors have lodged into the ash at
 strange angles. Because the terrain is all one color, it's hard to tell where it's safe to walk or where you're about to
-run into a mirror.
+run into a find_longest_mirror_size.
 
 You note down the patterns of ash (`.`) and rocks (`#`) that you see as you walk (your puzzle input); perhaps by
 carefully analyzing these patterns, you can figure out where the mirrors are!
@@ -86,3 +86,7 @@ rows above it, a total of **405**.
 
 Find the line of reflection in each of the patterns in your notes. **What number do you get after summarizing all of
 your notes?**
+
+Your puzzle answer was `32723`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
