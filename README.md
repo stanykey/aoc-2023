@@ -18,7 +18,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 11: Cosmic Expansion
 - [x] Day 12: Hot Springs
 - [x] Day 13: Point of Incidence
-- [ ] Day 14
+- [ ] Day 14: Parabolic Reflector Dish
 - [ ] Day 15
 - [ ] Day 16
 - [ ] Day 17

@@ -74,3 +74,7 @@ The total load is the sum of the load caused by all of the **rounded rocks**. In
 
 Tilt the platform so that the rounded rocks all roll north. Afterward, **what is the total load on the north support
 beams?**
+
+Your puzzle answer was `110274`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
