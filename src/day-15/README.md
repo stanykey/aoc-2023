@@ -206,3 +206,7 @@ So, the above example ends up with a total focusing power of **145**.
 
 With the help of an over-enthusiastic reindeer in a hard hat, follow the initialization sequence. **What is the focusing
 power of the resulting lens configuration?**
+
+Your puzzle answer was `221627`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
