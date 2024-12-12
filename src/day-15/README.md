@@ -87,3 +87,7 @@ expected verification number and is currently running around the facility with i
 
 Run the HASH algorithm on each step in the initialization sequence. **What is the sum of the results?** (The
 initialization sequence is one long line; be careful when copy-pasting it.)
+
+Your puzzle answer was `516469`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
