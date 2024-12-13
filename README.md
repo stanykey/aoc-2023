@@ -20,7 +20,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 13: Point of Incidence
 - [x] Day 14: Parabolic Reflector Dish
 - [x] Day 15: Lens Library
-- [ ] Day 16: The Floor Will Be Lava
+- [x] Day 16: The Floor Will Be Lava
 - [ ] Day 17
 - [ ] Day 18
 - [ ] Day 19

@@ -1,6 +1,7 @@
 #include <core/io.hxx>
 #include <core/strings.hxx>
 
+#include <algorithm>
 #include <cstddef>
 #include <cstdint>
 #include <filesystem>
@@ -56,7 +57,7 @@ struct std::hash<Beam> {
 };
 
 namespace {
-    auto energized_tiles(const Grid& grid) -> std::int64_t {
+    auto energized_tiles(const Grid& grid, Coordinate start_pos, Coordinate start_dir) -> std::int64_t {
         auto queue     = std::queue<Beam>{};
         auto visited   = std::unordered_set<Beam>{};
         auto energized = std::unordered_set<Coordinate>{};
@@ -69,6 +70,7 @@ namespace {
             if (beam.position.row >= std::ssize(grid)) {
                 return false;
             }
+
             if (beam.position.col >= std::ssize(grid[0])) {
                 return false;
             }
@@ -77,17 +79,18 @@ namespace {
         };
 
         const auto continue_ray = [&](Coordinate pos, Coordinate dir) {
-            if (can_head_next(Beam{pos + dir, dir})) {
-                visited.emplace(pos + dir, dir);
-                queue.emplace(pos + dir, dir);
-                energized.emplace(pos + dir);
+            pos = pos + dir;
+            if (can_head_next({pos, dir})) {
+                visited.emplace(pos, dir);
+                queue.emplace(pos, dir);
+                energized.emplace(pos);
             }
         };
 
         // prepare for the old good one BFS
-        queue.push(Beam{{0, 0}, {0, 1}});
-        visited.insert(Beam{{0, 0}, {0, 1}});
-        energized.insert(Coordinate{0, 0});
+        queue.emplace(start_pos, start_dir);
+        visited.emplace(start_pos, start_dir);
+        energized.emplace(start_pos);
         while (not queue.empty()) {
             const auto [pos, dir] = queue.front();
             queue.pop();
@@ -132,6 +135,35 @@ namespace {
 
         return std::ssize(energized);
     }
+
+    auto energize_tiles_with_sides(const Grid& grid) -> std::int64_t {
+        auto max_result = 0ll;
+
+        const auto grid_rows = std::ssize(grid);
+        const auto grid_cols = std::ssize(grid[0]);
+
+        // handle top row (downward)
+        for (auto col = 0ll; col < grid_cols; col++) {
+            max_result = std::max(max_result, energized_tiles(grid, {0, col}, {1, 0}));
+        }
+
+        // handle bottom row (upward)
+        for (auto col = 0ll; col < grid_cols; col++) {
+            max_result = std::max(max_result, energized_tiles(grid, {grid_rows - 1, col}, {-1, 0}));
+        }
+
+        // handle left column (rightward)
+        for (auto row = 0ll; row < grid_rows; row++) {
+            max_result = std::max(max_result, energized_tiles(grid, {row, 0}, {0, 1}));
+        }
+
+        // handle right column (leftward)
+        for (auto row = 0ll; row < grid_rows; row++) {
+            max_result = std::max(max_result, energized_tiles(grid, {row, grid_cols - 1}, {0, -1}));
+        }
+
+        return max_result;
+    }
 }  // namespace
 
 
@@ -140,7 +172,8 @@ int main() {
     const auto data = core::io::read_file(path, true);
     const auto map  = core::strings::split(core::strings::strip(data), "\n");
 
-    std::cout << std::format("The number of energized tiles is : {}\n", energized_tiles(map));
+    std::cout << std::format("The number of energized tiles is : {}\n", energized_tiles(map, {0, 0}, {0, 1}));
+    std::cout << std::format("The number of energized tiles with sides is : {}\n", energize_tiles_with_sides(map));
 
     return 0;
 }
