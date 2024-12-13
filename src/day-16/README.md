@@ -84,3 +84,7 @@ Ultimately, in this example, **46** tiles become **energized**.
 
 The light isn't energizing enough tiles to produce lava; to debug the contraption, you need to start by analyzing the
 current situation. With the beam starting in the top-left heading right, **how many tiles end up being energized?**
+
+Your puzzle answer was `7434`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
