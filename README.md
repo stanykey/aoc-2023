@@ -21,7 +21,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 14: Parabolic Reflector Dish
 - [x] Day 15: Lens Library
 - [x] Day 16: The Floor Will Be Lava
-- [ ] Day 17
+- [ ] Day 17: Clumsy Crucible
 - [ ] Day 18
 - [ ] Day 19
 - [ ] Day 20

@@ -70,3 +70,7 @@ This path never moves more than three consecutive blocks in the same direction a
 
 Directing the crucible from the lava pool to the machine parts factory, but not moving more than three consecutive
 blocks in the same direction, **what is the least heat loss it can incur?**
+
+Your puzzle answer was `767`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
