@@ -131,3 +131,7 @@ This route causes the ultra crucible to incur the minimum possible heat loss of 
 
 Directing the **ultra crucible** from the lava pool to the machine parts factory, **what is the least heat loss it can
 incur?**
+
+Your puzzle answer was `904`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
