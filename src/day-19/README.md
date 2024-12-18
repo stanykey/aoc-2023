@@ -72,3 +72,7 @@ of the ratings for **all** of the accepted parts gives the sum total of **19114*
 
 Sort through all of the parts you've been given; **what do you get if you add together all of the rating numbers for all
 of the parts that ultimately get accepted?**
+
+Your puzzle answer was `374873`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
