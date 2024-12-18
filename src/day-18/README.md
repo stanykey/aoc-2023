@@ -67,3 +67,7 @@ edges are also painted according to the color codes in the dig plan.
 
 The Elves are concerned the lagoon won't be large enough; if they follow their dig plan, **how many cubic meters of lava
 could it hold?**
+
+Your puzzle answer was `42317`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*

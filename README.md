@@ -22,7 +22,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 15: Lens Library
 - [x] Day 16: The Floor Will Be Lava
 - [x] Day 17: Clumsy Crucible
-- [ ] Day 18
+- [ ] Day 18: Lavaduct Lagoon
 - [ ] Day 19
 - [ ] Day 20
 - [ ] Day 21
