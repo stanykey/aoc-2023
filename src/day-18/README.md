@@ -105,3 +105,7 @@ lava.
 
 Convert the hexadecimal color codes into the correct instructions; if the Elves follow this new dig plan, **how many
 cubic meters of lava could the lagoon hold?**
+
+Your puzzle answer was `83605563360288`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
