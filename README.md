@@ -23,7 +23,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 16: The Floor Will Be Lava
 - [x] Day 17: Clumsy Crucible
 - [x] Day 18: Lavaduct Lagoon
-- [ ] Day 19: Aplenty
+- [x] Day 19: Aplenty
 - [ ] Day 20
 - [ ] Day 21
 - [ ] Day 22

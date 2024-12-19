@@ -91,3 +91,7 @@ In the above example, there are **167409079868000** distinct combinations of rat
 
 Consider only your list of workflows; the list of part ratings that the Elves wanted you to sort is no longer relevant.
 **How many distinct combinations of ratings will be accepted by the Elves' workflows?**
+
+Your puzzle answer was `122112157518711`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
