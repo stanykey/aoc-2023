@@ -24,7 +24,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 17: Clumsy Crucible
 - [x] Day 18: Lavaduct Lagoon
 - [x] Day 19: Aplenty
-- [ ] Day 20
+- [ ] Day 20: Pulse Propagation
 - [ ] Day 21
 - [ ] Day 22
 - [ ] Day 23

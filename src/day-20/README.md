@@ -157,3 +157,7 @@ Multiplying these together gives **11687500**.
 Consult your module configuration; determine the number of low pulses and high pulses that would be sent after pushing
 the button `1000` times, waiting for all pulses to be fully handled after each push of the button. **What do you get if
 you multiply the total number of low pulses sent by the total number of high pulses sent?**
+
+Your puzzle answer was `711650489`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*

@@ -70,13 +70,16 @@ SortUsingDeclarations: true
 SortIncludes: CaseSensitive
 IncludeBlocks: Regroup
 IncludeCategories:
+  # module
+  - Regex: '".+\..+"'
+    Priority: 0
   # core
   - Regex: '<core.+\..+>'
-    Priority: 0
+    Priority: 1
 
   # built-in
   - Regex: '<([A-Za-z0-9\Q/-_\E])+>'
-    Priority: 1
+    Priority: 2
 
 CommentPragmas: '^ IWYU pragma:'
 IncludeIsMainRegex: (Test)?$
