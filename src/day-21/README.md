@@ -177,3 +177,7 @@ steps:
 
 However, the step count the Elf needs is much larger! Starting from the garden plot marked S on your infinite map, **how
 many garden plots could the Elf reach in exactly `26501365` steps?**
+
+Your puzzle answer was `599763113936220`.
+
+*__Both parts of this puzzle are complete! They provide two gold stars: **__*
