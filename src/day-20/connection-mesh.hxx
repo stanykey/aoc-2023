@@ -8,6 +8,7 @@
 #include <queue>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <variant>
 #include <vector>
 
@@ -37,7 +38,7 @@ struct FlipFlop {
     }
 
     auto receive_signal(ConnectionMesh&, Signal::Strength, const std::string& from) -> void;
-    auto sends_to(const std::string& label) -> bool {
+    auto sends_to(const std::string& label) const -> bool {
         return std::ranges::contains(connections, label);
     }
 };
@@ -73,12 +74,17 @@ public:
     using Modules = std::unordered_map<std::string, Module>;
 
 public:
-    Modules            modules;
-    std::queue<Signal> pending_signals;
-    std::size_t        low_signals  = 0;
-    std::size_t        high_signals = 0;
+    Modules                         modules;
+    std::queue<Signal>              pending_signals;
+    std::size_t                     low_signals  = 0;
+    std::size_t                     high_signals = 0;
+    std::string                     tracked;
+    std::string                     tracked_source;
+    std::unordered_set<std::string> triggers;
 
 public:
+    auto set_track_connection(const std::string& target = {}) -> void;
+
     auto send_signal(Signal::Strength signal, const std::string& from, const std::string& to) -> void;
     auto process_signal() -> bool;
 

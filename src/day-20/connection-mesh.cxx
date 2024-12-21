@@ -98,17 +98,36 @@ auto FlipFlop::receive_signal(ConnectionMesh& mesh, Signal::Strength signal, con
     }
 }
 
+auto ConnectionMesh::set_track_connection(const std::string& target) -> void {
+    if (target.empty()) {
+        tracked.clear();
+        tracked_source.clear();
+        triggers.clear();
+    }
+
+    for (const auto& [name, module] : modules) {
+        if (std::visit([&](const auto& source) { return source.sends_to(target); }, module)) {
+            tracked        = target;
+            tracked_source = name;
+        }
+    }
+}
+
 auto ConnectionMesh::send_signal(Signal::Strength signal, const std::string& from, const std::string& to) -> void {
     switch (signal) {
         case Signal::Strength::HIGH: {
             pending_signals.emplace(Signal::Strength::HIGH, from, to);
-            high_signals++;
+            if (to == tracked) {
+                high_signals++;
+            }
             break;
         }
 
         case Signal::Strength::LOW: {
             pending_signals.emplace(Signal::Strength::LOW, from, to);
-            low_signals++;
+            if (to == tracked) {
+                low_signals++;
+            }
             break;
         }
     }
@@ -121,6 +140,12 @@ auto ConnectionMesh::process_signal() -> bool {
 
     const auto [signal, from, to] = pending_signals.front();
     pending_signals.pop();
+
+    if (to == tracked_source) {
+        if (signal == Signal::Strength::HIGH) {
+            triggers.insert(from);
+        }
+    }
 
     const auto it = modules.find(to);
     if (it == modules.end()) {
