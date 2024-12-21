@@ -4,6 +4,7 @@
 #include <ios>
 #include <istream>
 #include <iterator>
+#include <set>
 #include <string>
 
 
@@ -15,8 +16,8 @@ namespace core::io {
     }
 
     auto read_file(const std::string& path, bool as_text) -> std::string {
-        auto mode   = as_text ? std::ios::in : (std::ios::binary | std::ios::in | std::ios::ate);
-        auto stream = std::ifstream{path, mode};
+        const auto mode   = as_text ? std::ios::in : (std::ios::binary | std::ios::in | std::ios::ate);
+        auto       stream = std::ifstream{path, mode};
         if (!stream) {
             throw std::ios::failure{"Failed to open file"};
         }
@@ -38,4 +39,8 @@ namespace core::io {
         return content;
     }
 
+    auto skip(std::istream& stream, std::string_view ignored) -> std::istream& {
+        const auto banned = std::set<int>{ignored.begin(), ignored.end()};
+        return skip(stream, [&banned](int symbol) -> bool { return banned.contains(symbol); });
+    }
 }  // namespace core::io
