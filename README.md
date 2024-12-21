@@ -25,7 +25,7 @@ Language of choice: `C++ 20/23`
 - [x] Day 18: Lavaduct Lagoon
 - [x] Day 19: Aplenty
 - [x] Day 20: Pulse Propagation
-- [ ] Day 21
+- [ ] Day 21: Step Counter
 - [ ] Day 22
 - [ ] Day 23
 - [ ] Day 24

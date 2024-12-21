@@ -107,3 +107,7 @@ However, the Elf **actually needs to get 64 steps today**, and the map he's hand
 map.
 
 Starting from the garden plot marked S on your map, how many garden plots could the Elf reach in exactly 64 steps?
+
+Your puzzle answer was `3600`.
+
+*__The first half of this puzzle is complete! It provides one gold star: *__*
